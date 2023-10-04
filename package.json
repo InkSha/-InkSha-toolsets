@@ -1,0 +1,15 @@
+{
+  "name": "mytools",
+  "version": "1.0.0",
+  "description": "My common use tools set.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitee.com:InkSha/my-tools-library.git"
+  },
+  "author": "InkSha",
+  "license": "MIT"
+}
