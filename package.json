@@ -11,5 +11,8 @@
     "url": "git@gitee.com:InkSha/my-tools-library.git"
   },
   "author": "InkSha",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.8.2"
+  }
 }
