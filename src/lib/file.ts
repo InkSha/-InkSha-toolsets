@@ -4,24 +4,25 @@
  * @license MIT
  * @author InkSha<git@inksha.com>
  * @created 2023-10-04
- * @updated 2023-10-04
+ * @updated 2023-10-08
  * @version 1.0.0
  */
 
 import fs from 'node:fs'
 import path from 'node:path'
+import { parsePath } from './path'
 
 export class Files {
 
   /**
-   * 创建文件夹
-   * @param dir 文件夹路径
-   * @returns 文件夹是否存在
-   */
+  * 创建文件夹
+  * @param dir 文件夹路径
+  * @returns 文件夹是否存在
+  */
   static mkdir (dir: string): boolean {
     const parse = path.parse(dir)
     dir = parse.ext ? parse.dir : dir
-    for (const _path of this.parsePath(dir)) {
+    for (const _path of parsePath(dir)) {
       if (!Files.fileExist(_path)) fs.mkdirSync(_path)
     }
     return Files.fileExist(dir)
@@ -40,28 +41,6 @@ export class Files {
         reject(e)
       }
     })
-  }
-
-  /**
-   * 解析路径
-   * @param _path 路径
-   * @returns 路径数组
-   */
-  static parsePath (_path: string): string[] {
-    if (!_path) return []
-    const root = _path.charAt(0)
-    const hasRoot = ['/', '\\'].includes(root)
-    const result: string[] = []
-    hasRoot && (_path = _path.slice(1))
-    let tmpPath = path.parse(_path)
-    result.push(tmpPath.ext ? tmpPath.dir : _path)
-    while (tmpPath.dir) {
-      if (!tmpPath.ext) {
-        result.push(`${(hasRoot ? root : '')}${tmpPath.dir}`)
-      }
-      tmpPath = path.parse(tmpPath.dir)
-    }
-    return result.reverse()
   }
 
   /**
