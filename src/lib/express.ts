@@ -8,6 +8,7 @@
  * @version 1.0.0
  */
 
+import type { Router, RequestHandler } from 'express'
 import express from 'express'
 import multer from 'multer'
 import { Image } from './image'
@@ -21,7 +22,9 @@ export const expressConfig = {
   domain: 'localhost'
 }
 
-export const uploadFileMiddleware = (Request: express.Request, Response: express.Response, next: () => void) => {
+export const ImageRouter: Router = express.Router()
+
+export const uploadFileMiddleware: RequestHandler = (Request, Response, next) => {
   const upload = multer({
     storage: multer.memoryStorage(),
     dest: '/assets/tmp/'
@@ -36,7 +39,7 @@ export const uploadFileMiddleware = (Request: express.Request, Response: express
   })
 }
 
-export const uploadImage = (Request: express.Request, Response: express.Response): void => {
+export const uploadImage: RequestHandler = (Request, Response): void => {
   const files = Request.files as Express.Multer.File[];
   const filesArr: { src: string }[] = []
   for (let i = 0; i < files.length; i++) filesArr.push({
@@ -45,7 +48,7 @@ export const uploadImage = (Request: express.Request, Response: express.Response
   Response.send(filesArr.map(url => expressConfig.domain + url))
 }
 
-export const getImage = (Request: express.Request, Response: express.Response) => {
+export const getImage: RequestHandler = (Request, Response) => {
   Response.set('content-type', 'image/jpeg')
   const path = Request.query?.path
   const responseData: any[] = []

@@ -22,7 +22,7 @@ export function tryAndCatch<Result> (
   try {
     const result = execFunction()
     success && success(result)
-  } catch (e) {
+  } catch (e: any) {
     error && error(new Error(e))
   }
 }

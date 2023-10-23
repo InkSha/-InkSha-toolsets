@@ -1,16 +1,17 @@
 {
-  "name": "@InkSha/toolsets",
+  "name": "@inksha/toolsets",
   "version": "1.0.0",
   "description": "My collection of commonly used development tools.",
   "main": "src/index.ts",
   "scripts": {
     "start": "node --loader ts-node/esm src/index.ts",
     "dev": "nodemon --config nodemon.json src/index.ts",
-    "dev: debug": "nodemon --config nodemon.json --inspect-brk src/index.ts"
+    "dev: debug": "nodemon --config nodemon.json --inspect-brk src/index.ts",
+    "toJs": "tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:InkSha/-InkSha-toolsets.git"
+    "url": "git@github.com:InkSha/toolset.git"
   },
   "author": "InkSha",
   "license": "MIT",
