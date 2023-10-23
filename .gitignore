@@ -4,6 +4,7 @@ node_modules
 .history
 log
 /lib
+/docs
 
 # local env files
 .env.local
