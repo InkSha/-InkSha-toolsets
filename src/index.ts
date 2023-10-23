@@ -12,21 +12,7 @@
 export const CURRENT_PROJECT_VERSION = '1.0.0'
 import Tools from './lib'
 
-const array1 = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9]
-]
-const array2 = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9]
-]
-
-console.log(Tools.array.RotateArray(array1, true).join('\n'), '\n')
-console.log(Tools.array.RotateArray(array2).join('\n'))
-
 export default {
-  ...Tools,
-  version: CURRENT_PROJECT_VERSION
+	...Tools,
+	version: CURRENT_PROJECT_VERSION,
 }

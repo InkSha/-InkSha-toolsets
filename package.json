@@ -7,7 +7,8 @@
     "start": "node --loader ts-node/esm src/index.ts",
     "dev": "nodemon --config nodemon.json src/index.ts",
     "dev: debug": "nodemon --config nodemon.json --inspect-brk src/index.ts",
-    "toJs": "tsc"
+    "toJs": "tsc",
+    "format": "prettier --write ./src/**"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,9 @@
     "@types/multer": "^1.4.9",
     "@types/mysql": "^2.15.22",
     "@types/node": "^20.8.2",
-    "@types/sharp": "^0.32.0"
+    "@types/sharp": "^0.32.0",
+    "eslint": "^8.52.0",
+    "prettier": "^3.0.3"
   },
   "dependencies": {
     "axios": "^1.5.1",

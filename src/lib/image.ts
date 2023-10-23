@@ -14,26 +14,32 @@ import { computedHash } from './file'
 import { Time } from './time'
 
 export class Image {
+	constructor(
+		public ImageCompressionQuality = 50,
+		public defaultFormat:
+			| keyof sharp.FormatEnum
+			| sharp.AvailableFormatInfo = 'jpeg',
+		public saveBaseUrl = '/images',
+	) {}
 
-  constructor (
-    public ImageCompressionQuality = 50,
-    public defaultFormat: keyof sharp.FormatEnum | sharp.AvailableFormatInfo = 'jpeg',
-    public saveBaseUrl = '/images'
-  ) {}
-
-  /**
-   * 图片压缩
-   * @param options 图片压缩选项
-   * @returns
-   */
-  imageCompression (buffer: Buffer): string {
-    const hash = computedHash(buffer)
-    const { year, month, date } = Time.formatDate()
-    const filename = path.join(`${year}`, `${month}`, `${date}`, `${hash}.${this.defaultFormat}`)
-    sharp(buffer)
-      .resize({ width: 300 })
-      .toFormat(this.defaultFormat, { quality: this.ImageCompressionQuality })
-      .toFile(`${this.saveBaseUrl}/${filename}`)
-    return filename
-  }
+	/**
+	 * 图片压缩
+	 * @param options 图片压缩选项
+	 * @returns
+	 */
+	imageCompression(buffer: Buffer): string {
+		const hash = computedHash(buffer)
+		const { year, month, date } = Time.formatDate()
+		const filename = path.join(
+			`${year}`,
+			`${month}`,
+			`${date}`,
+			`${hash}.${this.defaultFormat}`,
+		)
+		sharp(buffer)
+			.resize({ width: 300 })
+			.toFormat(this.defaultFormat, { quality: this.ImageCompressionQuality })
+			.toFile(`${this.saveBaseUrl}/${filename}`)
+		return filename
+	}
 }

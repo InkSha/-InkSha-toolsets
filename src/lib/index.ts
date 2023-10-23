@@ -18,12 +18,12 @@ import * as _Image from './image'
 import * as _Express from './express'
 
 export default {
-  array: _Array,
-  async: _Async,
-  math: _Math,
-  path: _Path,
-  time: _Time,
-  file: _File,
-  image: _Image,
-  express: _Express,
+	array: _Array,
+	async: _Async,
+	math: _Math,
+	path: _Path,
+	time: _Time,
+	file: _File,
+	image: _Image,
+	express: _Express,
 }
