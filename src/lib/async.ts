@@ -4,7 +4,7 @@
  * @license MIT
  * @author InkSha<git@inksha.com>
  * @created 2023-10-07
- * @updated 2023-10-07
+ * @updated 2023-10-23
  * @version 1.0.0
  */
 
@@ -23,7 +23,7 @@ export function tryAndCatch<Result> (
     const result = execFunction()
     success && success(result)
   } catch (e) {
-    error && error(new Error())
+    error && error(new Error(e))
   }
 }
 

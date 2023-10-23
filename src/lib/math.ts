@@ -4,7 +4,7 @@
  * @license MIT
  * @author InkSha<git@inksha.com>
  * @created 2023-10-07
- * @updated 2023-10-07
+ * @updated 2023-10-23
  * @version 1.0.0
  */
 
@@ -22,3 +22,9 @@ export function generatorRandomList (start = 0, end = 100, quantity = 1, repeat 
   }
   return list
 }
+
+export const addition = (num1: number, num2: number): number => num1 + num2
+export const subtraction = (num1: number, num2: number): number => num1 - num2
+export const multiplication = (num1: number, num2: number): number => num1 * num2
+export const division = (num1: number, num2: number): number => num1 / num2
+export const power = (base: number, power: number): number => base ** power
