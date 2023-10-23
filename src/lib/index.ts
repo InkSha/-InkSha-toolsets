@@ -14,6 +14,8 @@ import * as _Math from './math'
 import * as _Path from './path'
 import * as _Time from './time'
 import * as _File from './file'
+import * as _Image from './image'
+import * as _Express from './express'
 
 export default {
   array: _Array,
@@ -22,4 +24,6 @@ export default {
   path: _Path,
   time: _Time,
   file: _File,
+  image: _Image,
+  express: _Express,
 }

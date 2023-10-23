@@ -56,6 +56,10 @@ export const removeFiles = (path: string): boolean => {
   return fileExist(path)
 }
 
+export const createStream = (filepath: string) => fs.createReadStream(filepath)
+
+export const createSteamSync = (filepath: string) => asyncExec(() => createStream(filepath))
+
 export const mkdirAsync = (dir: string) => asyncExec(() => mkdir(dir))
 
 export const readFileAsync = (filePath: string) => asyncExec(() => readFile(filePath))

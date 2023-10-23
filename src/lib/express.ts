@@ -1,0 +1,64 @@
+/**
+ * @file Express middleware and methods module.
+ * @description some express middleware and methods module.
+ * @license MIT
+ * @author InkSha<git@inksha.com>
+ * @created 2023-10-23
+ * @updated 2023-10-23
+ * @version 1.0.0
+ */
+
+import express from 'express'
+import multer from 'multer'
+import { Image } from './image'
+import { createStream } from './file'
+
+export const expressConfig = {
+  uploadImage: '/upload/img',
+  getImage: '/get/img',
+  UploadFilesFields: 'UploadFiles',
+  imageHandle: new Image(),
+  domain: 'localhost'
+}
+
+export const uploadFileMiddleware = (Request: express.Request, Response: express.Response, next: () => void) => {
+  const upload = multer({
+    storage: multer.memoryStorage(),
+    dest: '/assets/tmp/'
+  }).array(expressConfig.UploadFilesFields, 10)
+
+  upload(Request, Response, err => {
+    if (err) Response.send(new Error(err))
+    else {
+      Request.body[expressConfig.UploadFilesFields] = Request.body.filename
+      next()
+    }
+  })
+}
+
+export const uploadImage = (Request: express.Request, Response: express.Response): void => {
+  const files = Request.files as Express.Multer.File[];
+  const filesArr: { src: string }[] = []
+  for (let i = 0; i < files.length; i++) filesArr.push({
+    src: expressConfig.getImage + '?path=' + expressConfig.imageHandle.imageCompression(files[i].buffer)
+  })
+  Response.send(filesArr.map(url => expressConfig.domain + url))
+}
+
+export const getImage = (Request: express.Request, Response: express.Response) => {
+  Response.set('content-type', 'image/jpeg')
+  const path = Request.query?.path
+  const responseData: any[] = []
+  if (path) {
+    createStream(expressConfig.imageHandle.saveBaseUrl + path)
+      .on('data', chunk => {
+        responseData.push(chunk)
+      })
+      .on('end', () => {
+        Response.write(Buffer.concat(responseData))
+        Response.end()
+      })
+  } else {
+    Response.end()
+  }
+}
