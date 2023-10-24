@@ -168,7 +168,7 @@ export class Time {
    * @param day 格式化的星期几
    * @returns 格式化的日期对象
    */
-  static formatDate (year = 0, month = 0, date = 0, day = 0) {
+  static formatDate(year = 0, month = 0, date = 0, day = 0) {
     day += 1
     return { year, month, date, day }
   }

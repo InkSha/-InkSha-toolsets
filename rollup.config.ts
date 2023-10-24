@@ -10,10 +10,12 @@ import { defineConfig } from 'rollup'
 
 const plugins = [
   alias({
-    entries: [{
-      find: '@',
-      replacement: new URL('./src', import.meta.url).pathname
-    }]
+    entries: [
+      {
+        find: '@',
+        replacement: new URL('./src', import.meta.url).pathname,
+      },
+    ],
   }),
   resolve(),
   commonjs(),
@@ -22,24 +24,28 @@ const plugins = [
   esbuild(),
   babel({
     babelHelpers: 'bundled',
-    extensions: ['.js', '.vue']
+    extensions: ['.js', '.vue'],
   }),
   copy({
-    targets: [{
-      dest: ['dist'],
-      src: ['src/assets/*', '!src/assets/*.ts'],
-      rename: (name, ext) => `assets/${name}.${ext}`
-    }],
-    expandDirectories: false
-  })
+    targets: [
+      {
+        dest: ['dist'],
+        src: ['src/assets/*', '!src/assets/*.ts'],
+        rename: (name, ext) => `assets/${name}.${ext}`,
+      },
+    ],
+    expandDirectories: false,
+  }),
 ]
 const input = './src/index.ts'
 export default defineConfig({
   input,
-  output: [{
+  output: [
+    {
       dir: './dist',
       format: 'umd',
-      name: 'PackageName'
-    }],
+      name: 'PackageName',
+    },
+  ],
   plugins,
 })

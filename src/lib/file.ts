@@ -38,8 +38,8 @@ export const readFile = (filePath: string, binary = false): string => {
   return fileExist(filePath)
     ? filePath
       ? fs.readFileSync(filePath, {
-        encoding: binary ? 'binary' : 'utf8',
-      })
+          encoding: binary ? 'binary' : 'utf8',
+        })
       : ''
     : ''
 }
@@ -119,8 +119,11 @@ export const readFileAsync = (filePath: string) =>
  * @param append 是否追加
  * @returns 包含文件是否存在的 Promise
  */
-export const writeFileAsync = (filePath: string, data: string | NodeJS.ArrayBufferView, append = true) =>
-  asyncExec(() => writeFile(filePath, data, append))
+export const writeFileAsync = (
+  filePath: string,
+  data: string | NodeJS.ArrayBufferView,
+  append = true,
+) => asyncExec(() => writeFile(filePath, data, append))
 
 /**
  * 异步的判断文件是否存在

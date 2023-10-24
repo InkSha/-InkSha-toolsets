@@ -20,7 +20,7 @@ export function RotateArray<Element = number>(
 ): Element[][] {
   for (let row = 0; row < array.length; row++) {
     for (let col = row; col < array[row].length; col++) {
-      [array[row][col], array[col][row]] = [array[col][row], array[row][col]]
+      ;[array[row][col], array[col][row]] = [array[col][row], array[row][col]]
     }
   }
   return left ? array.reverse() : array.map((row) => row.reverse())

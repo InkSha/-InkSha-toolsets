@@ -13,7 +13,9 @@
  * @param callback 回调函数
  * @returns 包含回调结果的 Promise
  */
-export function asyncExec<Returns = void>(callback: (...arg: any[]) => Returns) {
+export function asyncExec<Returns = void>(
+  callback: (...arg: any[]) => Returns,
+) {
   return new Promise<Returns>((resolve, reject) => {
     tryAndCatch(callback, resolve, reject)
   })
@@ -44,7 +46,10 @@ export function tryAndCatch<Result>(
  * @param race 是否按顺序执行
  * @returns 包含执行结果列表的 Promise
  */
-export function asyncExecList<Result>(list: ((...arg: any[]) => Result)[], race = false) {
+export function asyncExecList<Result>(
+  list: ((...arg: any[]) => Result)[],
+  race = false,
+) {
   return new Promise((resolve, reject) => {
     tryAndCatch(
       () => {
