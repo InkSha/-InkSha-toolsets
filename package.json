@@ -2,8 +2,8 @@
   "name": "@inksha/toolsets",
   "version": "1.0.0",
   "description": "My collection of commonly used development tools.",
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "index.d.ts",
   "exports": {
     ".": {
@@ -30,11 +30,12 @@
     "dev:test": "jest --watch",
     "dev:js": "tsc",
     "format": "npm run build:lint && npm run build:format",
+    "publish": "npm publish --access public",
     "start": "node --loader ts-node/esm src/index.ts"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:InkSha/toolset.git"
+    "url": "git+ssh://git@github.com/InkSha/toolset.git"
   },
   "author": "InkSha",
   "license": "MIT",

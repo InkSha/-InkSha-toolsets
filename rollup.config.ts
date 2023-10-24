@@ -44,7 +44,7 @@ export default defineConfig({
     {
       dir: './dist',
       format: 'umd',
-      name: 'PackageName',
+      name: '@inksha/toolsets',
     },
   ],
   plugins,
