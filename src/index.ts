@@ -5,14 +5,10 @@
  * @license MIT
  * @author InkSha<git@inksha.com>
  * @created 2023-10-04
- * @updated 2023-10-04
- * @version 1.0.0
+ * @updated 2023-10-24
+ * @version 1.0.1
  */
 
-export const CURRENT_PROJECT_VERSION = '1.0.0'
-import Tools from './lib'
+export const Current_Project_Version = '1.0.0'
 
-export default {
-  ...Tools,
-  version: CURRENT_PROJECT_VERSION,
-}
+export * from './lib'

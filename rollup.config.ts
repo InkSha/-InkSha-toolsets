@@ -6,6 +6,7 @@ import esbuild from 'rollup-plugin-esbuild'
 import typescript from 'rollup-plugin-typescript2'
 import babel from '@rollup/plugin-babel'
 import copy from 'rollup-plugin-copy'
+import terser from '@rollup/plugin-terser'
 import { defineConfig } from 'rollup'
 
 const plugins = [
@@ -44,7 +45,9 @@ export default defineConfig({
     {
       dir: './dist',
       format: 'umd',
+      entryFileNames: 'index.min.js',
       name: '@inksha/toolsets',
+      plugins: [terser()],
     },
   ],
   plugins,

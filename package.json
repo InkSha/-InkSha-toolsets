@@ -1,6 +1,6 @@
 {
   "name": "@inksha/toolsets",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "My collection of commonly used development tools.",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -19,7 +19,8 @@
   "scripts": {
     "build": "rollup -c rollup.config.ts --configPlugin typescript",
     "build:format": "prettier --config .prettierrc.js --write ./src/** ./*js ./*ts",
-    "build:lint": "eslint src/**",
+    "build:lint": "eslint src/** --fix",
+    "build:publish": "npm publish --access public",
     "build:push": "npm run format && npm run build",
     "commit": "cz-customizable/standalone.js",
     "commit:log": "conventional-changelog -p angular -i CHANGELOG.md -s",
@@ -30,7 +31,6 @@
     "dev:test": "jest --watch",
     "dev:js": "tsc",
     "format": "npm run build:lint && npm run build:format",
-    "publish": "npm publish --access public",
     "start": "node --loader ts-node/esm src/index.ts"
   },
   "repository": {
@@ -71,6 +71,7 @@
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-json": "^6.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
     "@types/axios": "^0.14.0",
     "@types/express": "^4.17.18",
     "@types/jest": "^29.5.6",
@@ -105,7 +106,6 @@
     "express": "^4.18.2",
     "multer": "^1.4.5-lts.1",
     "mysql": "^2.18.1",
-    "nodemon": "^3.0.1",
     "sharp": "^0.32.6"
   }
 }
