@@ -4,7 +4,7 @@
  * @license MIT
  * @author InkSha<git@inksha.com>
  * @created 2023-10-23
- * @updated 2023-10-23
+ * @updated 2023-10-24
  * @version 1.0.0
  */
 
@@ -13,7 +13,16 @@ import sharp from 'sharp'
 import { computedHash } from './file'
 import { Time } from './time'
 
+/**
+ * @class
+ * @description 图像处理类
+ */
 export class Image {
+  /**
+   * @param ImageCompressionQuality 图片压缩等级
+   * @param defaultFormat 默认格式
+   * @param saveBaseUrl 基础保存路径
+   */
   constructor(
     public ImageCompressionQuality = 50,
     public defaultFormat:
@@ -25,7 +34,7 @@ export class Image {
   /**
    * 图片压缩
    * @param options 图片压缩选项
-   * @returns
+   * @returns 图片文件名
    */
   imageCompression(buffer: Buffer): string {
     const hash = computedHash(buffer)

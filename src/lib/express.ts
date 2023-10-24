@@ -4,7 +4,7 @@
  * @license MIT
  * @author InkSha<git@inksha.com>
  * @created 2023-10-23
- * @updated 2023-10-23
+ * @updated 2023-10-24
  * @version 1.0.0
  */
 

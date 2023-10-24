@@ -4,7 +4,7 @@
  * @license MIT
  * @author InkSha<git@inksha.com>
  * @created 2023-10-07
- * @updated 2023-10-07
+ * @updated 2023-10-24
  * @version 1.0.0
  */
 
@@ -32,11 +32,21 @@ export function parsePath(_path: string): string[] {
   return result.reverse()
 }
 
+/**
+ * 获取根路径
+ * @param filepath 文件路径
+ * @returns 获取的可能存在的根
+ */
 export function getRoot(filepath: string) {
   const char = filepath.charAt(0)
   return isRoot(char) ? char : ''
 }
 
+/**
+ * 判断字符是否属于根字符
+ * @param char 判断的字符
+ * @returns 是否属于根字符
+ */
 export function isRoot(char: string) {
   return ['/', '\\'].includes(char)
 }
