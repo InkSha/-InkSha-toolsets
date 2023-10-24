@@ -5,7 +5,7 @@
  * @author InkSha<git@inksha.com>
  * @created 2023-10-08
  * @updated 2023-10-24
- * @version 1.0.1
+ * @version 1.0.2
  */
 
 export * from './array'
@@ -14,4 +14,3 @@ export * from './math'
 export * from './path'
 export * from './time'
 export * from './file'
-export * from './image'
