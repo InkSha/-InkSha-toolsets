@@ -15,61 +15,61 @@ import { Image } from './image'
 import { createStream } from './file'
 
 export const expressConfig = {
-	uploadImage: '/upload/img',
-	getImage: '/get/img',
-	UploadFilesFields: 'UploadFiles',
-	imageHandle: new Image(),
-	domain: 'localhost',
+  uploadImage: '/upload/img',
+  getImage: '/get/img',
+  UploadFilesFields: 'UploadFiles',
+  imageHandle: new Image(),
+  domain: 'localhost',
 }
 
 export const ImageRouter: Router = express.Router()
 
 export const uploadFileMiddleware: RequestHandler = (
-	Request,
-	Response,
-	next,
+  Request,
+  Response,
+  next,
 ) => {
-	const upload = multer({
-		storage: multer.memoryStorage(),
-		dest: '/assets/tmp/',
-	}).array(expressConfig.UploadFilesFields, 10)
+  const upload = multer({
+    storage: multer.memoryStorage(),
+    dest: '/assets/tmp/',
+  }).array(expressConfig.UploadFilesFields, 10)
 
-	upload(Request, Response, (err) => {
-		if (err) Response.send(new Error(err))
-		else {
-			Request.body[expressConfig.UploadFilesFields] = Request.body.filename
-			next()
-		}
-	})
+  upload(Request, Response, (err) => {
+    if (err) Response.send(new Error(err))
+    else {
+      Request.body[expressConfig.UploadFilesFields] = Request.body.filename
+      next()
+    }
+  })
 }
 
 export const uploadImage: RequestHandler = (Request, Response): void => {
-	const files = Request.files as Express.Multer.File[]
-	const filesArr: { src: string }[] = []
-	for (const file of files)
-		filesArr.push({
-			src:
-				expressConfig.getImage +
-				'?path=' +
-				expressConfig.imageHandle.imageCompression(file.buffer),
-		})
-	Response.send(filesArr.map((url) => expressConfig.domain + url))
+  const files = Request.files as Express.Multer.File[]
+  const filesArr: { src: string }[] = []
+  for (const file of files)
+    filesArr.push({
+      src:
+        expressConfig.getImage +
+        '?path=' +
+        expressConfig.imageHandle.imageCompression(file.buffer),
+    })
+  Response.send(filesArr.map((url) => expressConfig.domain + url))
 }
 
 export const getImage: RequestHandler = (Request, Response) => {
-	Response.set('content-type', 'image/jpeg')
-	const path = Request.query?.path
-	const responseData: any[] = []
-	if (path) {
-		createStream(expressConfig.imageHandle.saveBaseUrl + path)
-			.on('data', (chunk) => {
-				responseData.push(chunk)
-			})
-			.on('end', () => {
-				Response.write(Buffer.concat(responseData))
-				Response.end()
-			})
-	} else {
-		Response.end()
-	}
+  Response.set('content-type', 'image/jpeg')
+  const path = Request.query?.path
+  const responseData: Uint8Array[] = []
+  if (path) {
+    createStream(expressConfig.imageHandle.saveBaseUrl + path)
+      .on('data', (chunk) => {
+        responseData.push(chunk as Buffer)
+      })
+      .on('end', () => {
+        Response.write(Buffer.concat(responseData))
+        Response.end()
+      })
+  } else {
+    Response.end()
+  }
 }

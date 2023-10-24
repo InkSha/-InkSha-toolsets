@@ -16,27 +16,27 @@ import path from 'node:path'
  * @returns 路径数组
  */
 export function parsePath(_path: string): string[] {
-	const result: string[] = []
-	if (_path) {
-		const root = getRoot(_path)
-		let tmpPath = path.parse(_path)
-		if (root) _path = _path.slice(1)
-		result.push(tmpPath.ext ? tmpPath.dir : _path)
-		while (tmpPath.dir) {
-			if (!tmpPath.ext) {
-				result.push(`${root}${tmpPath.dir}`)
-			}
-			tmpPath = path.parse(tmpPath.dir)
-		}
-	}
-	return result.reverse()
+  const result: string[] = []
+  if (_path) {
+    const root = getRoot(_path)
+    let tmpPath = path.parse(_path)
+    if (root) _path = _path.slice(1)
+    result.push(tmpPath.ext ? tmpPath.dir : _path)
+    while (tmpPath.dir) {
+      if (!tmpPath.ext) {
+        result.push(`${root}${tmpPath.dir}`)
+      }
+      tmpPath = path.parse(tmpPath.dir)
+    }
+  }
+  return result.reverse()
 }
 
 export function getRoot(filepath: string) {
-	const char = filepath.charAt(0)
-	return isRoot(char) ? char : ''
+  const char = filepath.charAt(0)
+  return isRoot(char) ? char : ''
 }
 
 export function isRoot(char: string) {
-	return ['/', '\\'].includes(char)
+  return ['/', '\\'].includes(char)
 }

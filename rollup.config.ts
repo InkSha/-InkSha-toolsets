@@ -1,4 +1,3 @@
-import dts from 'rollup-plugin-dts'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
@@ -32,17 +31,15 @@ const plugins = [
       rename: (name, ext) => `assets/${name}.${ext}`
     }],
     expandDirectories: false
-  }),
-  dts(),
+  })
 ]
-
+const input = './src/index.ts'
 export default defineConfig({
-  input: 'src/index.ts',
-  output: {
-    dir: './dist',
-    format: 'umd',
-    exports: 'auto',
-    sourcemap: true
-  },
-  plugins
+  input,
+  output: [{
+      dir: './dist',
+      format: 'umd',
+      name: 'PackageName'
+    }],
+  plugins,
 })

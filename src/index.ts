@@ -13,6 +13,6 @@ export const CURRENT_PROJECT_VERSION = '1.0.0'
 import Tools from './lib'
 
 export default {
-	...Tools,
-	version: CURRENT_PROJECT_VERSION,
+  ...Tools,
+  version: CURRENT_PROJECT_VERSION,
 }

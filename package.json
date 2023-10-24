@@ -7,8 +7,8 @@
   "types": "index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
       "types": "./index.d.ts"
     }
   },
@@ -17,15 +17,17 @@
     "*.d.ts"
   ],
   "scripts": {
-    "start": "node --loader ts-node/esm src/index.ts",
-    "dev": "nodemon --config nodemon.json src/index.ts",
-    "dev:debug": "nodemon --config nodemon.json --inspect-brk src/index.ts",
-    "toJs": "tsc",
-    "format": "prettier --write ./src/**",
-    "doc": "typedoc --options typedoc.json",
-    "dev:build": "rollup -c rollup.config.ts --configPlugin typescript --watch",
     "build": "rollup -c rollup.config.ts --configPlugin typescript",
-    "push": "npm run format && npm run build"
+    "build:format": "prettier --config .prettierrc.js --write ./src/** ./*js ./*ts",
+    "build:lint": "eslint src/** --fix",
+    "dev": "nodemon --config nodemon.json src/index.ts",
+    "dev:build": "rollup -c rollup.config.ts --configPlugin typescript --watch",
+    "dev:debug": "nodemon --config nodemon.json --inspect-brk src/index.ts",
+    "dev:doc": "typedoc --options typedoc.json",
+    "dev:js": "tsc",
+    "format": "npm run build:lint && npm run build:format",
+    "push": "npm run format && npm run build",
+    "start": "node --loader ts-node/esm src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -33,6 +35,23 @@
   },
   "author": "InkSha",
   "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-stated": {
+    "src*/**/*.ts": [
+      "prettier --config .prettierrc.js --write",
+      "eslint",
+      "git add"
+    ],
+    "src*/**/*.json": [
+      "prettier --config .prettierrc.js --write",
+      "eslint",
+      "git add"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.23.2",
     "@rollup/plugin-alias": "^5.0.1",
@@ -46,15 +65,20 @@
     "@types/mysql": "^2.15.22",
     "@types/node": "^20.8.2",
     "@types/sharp": "^0.32.0",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
     "esbuild": "^0.19.5",
-    "eslint": "^8.52.0",
+    "eslint": "latest",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
     "prettier": "^3.0.3",
     "rollup": "^4.1.4",
     "rollup-plugin-copy": "^3.5.0",
-    "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-esbuild": "^6.1.0",
     "rollup-plugin-typescript2": "^0.36.0",
-    "typedoc": "^0.25.2"
+    "ts-node": "^10.9.1",
+    "typedoc": "^0.25.2",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "axios": "^1.5.1",
@@ -62,8 +86,6 @@
     "multer": "^1.4.5-lts.1",
     "mysql": "^2.18.1",
     "nodemon": "^3.0.1",
-    "sharp": "^0.32.6",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
+    "sharp": "^0.32.6"
   }
 }
