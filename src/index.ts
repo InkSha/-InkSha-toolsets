@@ -5,11 +5,11 @@
  * @license MIT
  * @author InkSha<git@inksha.com>
  * @created 2023-10-04
- * @updated 2023-10-26
- * @version 1.0.6
+ * @updated 2023-10-28
+ * @version 1.0.7
  */
 
-export const Version = '1.0.6'
+export const Version = '1.0.7'
 
 export * from './lib'
 export * from './shared'
