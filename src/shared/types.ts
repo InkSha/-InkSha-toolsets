@@ -4,12 +4,17 @@
  * @license MIT
  * @author InkSha<git@inksha.com>
  * @created 2023-10-25
- * @updated 2023-10-25
- * @version 1.0.0
+ * @updated 2023-10-28
+ * @version 1.0.1
  */
 
 /** 原型类型 */
 export type PrototypeType = 'map' | 'date' | 'set' | 'regexp' | 'object'
+
+/** 索引对象 */
+export interface IndexObject<V = unknown> {
+  [index: string | number | symbol]: V
+}
 
 /**
  * 判断是否是字符串
@@ -63,9 +68,9 @@ export const isSymbol = (data: unknown): data is symbol =>
  * @param data 需要判断是否是对象的数据
  * @returns 是否是对象
  */
-export const isObject = (
+export const isObject = <R = Record<string | number | symbol, unknown>>(
   data: unknown,
-): data is Record<string | number | symbol, unknown> => {
+): data is R => {
   return !isNull(data) && typeof data === 'object'
 }
 
@@ -108,10 +113,10 @@ export const splitTypeofPrototype = (prototype: string): string =>
  * @param type 数据原型
  * @returns 是否是原型
  */
-export const isPrototype = (
+export const isPrototype = <Proto = IndexObject>(
   data: unknown,
   type: PrototypeType,
-): data is PrototypeType => {
+): data is Proto => {
   return splitTypeofPrototype(typeofPrototype(data)) === type
 }
 
