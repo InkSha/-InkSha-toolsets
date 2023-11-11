@@ -86,3 +86,35 @@ export const computedDivision = (num1: number, num2: number): number =>
  */
 export const computedPower = (base: number, power: number): number =>
   base ** power
+
+
+/**
+ * 生成一个在指定开始和结束范围内的随机数字
+ * @param start 开头范围
+ * @param end 结束范围
+ * @returns 在规定范围内的随机生成的数字
+ */
+function genRandom (start = 0, end = 100) {
+  return Math.floor(Math.random() * end + start) + 1
+}
+
+/**
+ * 生成指定长度的字符
+ * @param len 字符长度
+ * @returns 指定长度的字符串
+ */
+function genChar (len = 5) {
+  const result: string[] = []
+  for (let i = 0; i < len; i++) {
+    result.push(genRandom(0, 36).toString(36))
+  }
+  return result.join('')
+}
+
+/**
+ * 生成布尔标识
+ * @returns 一个布尔标识
+ */
+function genFlag () {
+  return genRandom() >= 50
+}

@@ -4,13 +4,11 @@
  * @license MIT
  * @author InkSha<git@inksha.com>
  * @created 2023-10-25
- * @updated 2023-10-28
- * @version 1.0.1
+ * @updated 2023-11-11
+ * @version 1.0.2
  */
 
 import { IndexObject, isArray, isPrototype } from './types'
-
-export * as Types from './types'
 
 /**
  * 深拷贝对象
