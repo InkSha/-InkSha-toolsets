@@ -4,13 +4,13 @@
  * @license MIT
  * @author InkSha<git@inksha.com>
  * @created 2023-10-07
- * @updated 2023-10-24
- * @version 1.0.0
+ * @updated 2023-11-11
+ * @version 1.0.1
  */
 
 /**
  * 异步执行
- * @param callback 回调函数
+ * @param callback 返回结果的回调函数
  * @returns 包含回调结果的 Promise
  */
 export function asyncExec<Returns = void>(
