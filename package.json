@@ -1,10 +1,11 @@
 {
   "name": "@inksha/toolsets",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "My collection of commonly used development tools.",
   "main": "dist/index.min.js",
   "module": "dist/index.min.mjs",
   "types": "dist/index.d.ts",
+  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.min.mjs",

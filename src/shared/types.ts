@@ -68,7 +68,7 @@ export const isSymbol = (data: unknown): data is symbol =>
  * @param data 需要判断是否是对象的数据
  * @returns 是否是对象
  */
-export const isObject = <R = Record<string | number | symbol, unknown>>(
+export const isObject = <R = Record<string | number | symbol, unknown>> (
   data: unknown,
 ): data is R => {
   return !isNull(data) && typeof data === 'object'
@@ -113,7 +113,7 @@ export const splitTypeofPrototype = (prototype: string): string =>
  * @param type 数据原型
  * @returns 是否是原型
  */
-export const isPrototype = <Proto = IndexObject>(
+export const isPrototype = <Proto = IndexObject> (
   data: unknown,
   type: PrototypeType,
 ): data is Proto => {
@@ -164,6 +164,6 @@ export const isRegExp = (data: unknown): data is RegExp =>
  * @param data 需要判断是否是 promise 的数据
  * @returns 是否是 promise
  */
-export const isPromise = <T = unknown>(data: unknown): data is Promise<T> => {
+export const isPromise = <T = unknown> (data: unknown): data is Promise<T> => {
   return isObject(data) && isFunction(data.then) && isFunction(data.catch)
 }
