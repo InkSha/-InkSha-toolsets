@@ -13,7 +13,7 @@
  * @param callback 返回结果的回调函数
  * @returns 包含回调结果的 Promise
  */
-export function asyncExec<Returns = void> (
+export function asyncExec<Returns = void>(
   callback: (...arg: any[]) => Returns,
 ) {
   return new Promise<Returns>((resolve, reject) => {
@@ -27,16 +27,14 @@ export function asyncExec<Returns = void> (
  * @param success 成功回调
  * @param error 失败回调
  */
-export function tryAndCatch<Result> (
+export function tryAndCatch<Result>(
   execFunction: () => Result,
   success?: (arg: Result) => void,
   error?: (error: Error) => void,
 ) {
   try {
     const result = execFunction()
-    return (
-      success ? success(result) : result
-    )
+    return success ? success(result) : result
   } catch (e) {
     if (error) error(new Error(`${e}`))
     else throw new Error(`${e}`)
@@ -49,7 +47,7 @@ export function tryAndCatch<Result> (
  * @param race 是否按顺序执行
  * @returns 包含执行结果列表的 Promise
  */
-export function asyncExecList<Result> (
+export function asyncExecList<Result>(
   list: ((...arg: any[]) => Result)[],
   race = false,
 ) {

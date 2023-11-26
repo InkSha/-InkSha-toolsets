@@ -4,8 +4,8 @@
  * @license MIT
  * @author InkSha<git@inksha.com>
  * @created 2023-10-07
- * @updated 2023-10-24
- * @version 1.0.0
+ * @updated 2023-11-26
+ * @version 1.0.2
  */
 
 /** 时间格式 */
@@ -150,6 +150,15 @@ export class Time {
   }
 
   /**
+   * 加零
+   * @param time 需要增加零的数字
+   * @returns '09' | '12'
+   */
+  static addZero(time: number) {
+    return `${time < 10 ? '0' : ''}${time}`
+  }
+
+  /**
    * 格式化时间
    * @param hour 格式化的时
    * @param min 格式化的分钟
@@ -171,5 +180,30 @@ export class Time {
   static formatDate(year = 0, month = 0, date = 0, day = 0) {
     day += 1
     return { year, month, date, day }
+  }
+
+  /**
+   * 日期转字符串
+   * @param split 分割符 默认 /
+   * @param noDay 是否取消星期几
+   * @returns 'yyyy/mm/dd' | 'yyyy/mm/dd/day'
+   */
+  static dateToString(split = '/', noDay = true) {
+    const { year, month, date, day } = this.formatDate()
+    return `${year}${split}${this.addZero(month)}${split}${this.addZero(
+      date,
+    )}${split}${noDay ? this.addZero(day) : ''}`
+  }
+
+  /**
+   * 时间转字符串
+   * @param split 分隔符 默认 :
+   * @returns 'hh:mm:ss'
+   */
+  static timeToString(split = ':') {
+    const { hour, min, sec } = this.formatTime()
+    return `${this.addZero(hour)}${split}${this.addZero(
+      min,
+    )}${split}${this.addZero(sec)}`
   }
 }
