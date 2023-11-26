@@ -71,7 +71,7 @@ export class Time {
    * @returns 当前日期的月
    */
   getMonth () {
-    return this.date.getMonth()
+    return this.date.getMonth() + 1
   }
 
   /**
@@ -150,11 +150,41 @@ export class Time {
   }
 
   /**
+ * 日期转字符串
+ * @param split 分割符 默认 /
+ * @param noDay 是否取消星期几
+ * @returns 'yyyy/mm/dd' | 'yyyy/mm/dd/day'
+ */
+  dateToString (split = '/', noDay = true) {
+    const { year, month, date, day } = this.formatDate()
+    return [
+      year,
+      this.addZero(month),
+      this.addZero(date),
+      ...(noDay ? [] : [this.addZero(day)])
+    ].join(split)
+  }
+
+  /**
+   * 时间转字符串
+   * @param split 分隔符 默认 :
+   * @returns 'hh:mm:ss'
+   */
+  timeToString (split = ':') {
+    const { hour, min, sec } = this.formatTime()
+    return [
+      this.addZero(hour),
+      this.addZero(min),
+      this.addZero(sec)
+    ].join(split)
+  }
+
+  /**
    * 加零
    * @param time 需要增加零的数字
    * @returns '09' | '12'
    */
-  static addZero (time: number) {
+  addZero (time: number) {
     return `${time < 10 ? '0' : ''}${time}`
   }
 
@@ -188,35 +218,5 @@ export class Time {
     if (!(~date)) date = now.getDate()
     if (!(~day)) day = now.getDay()
     return { year, month, date, day }
-  }
-
-  /**
-   * 日期转字符串
-   * @param split 分割符 默认 /
-   * @param noDay 是否取消星期几
-   * @returns 'yyyy/mm/dd' | 'yyyy/mm/dd/day'
-   */
-  static dateToString (split = '/', noDay = true) {
-    const { year, month, date, day } = this.formatDate()
-    return [
-      year,
-      this.addZero(month),
-      this.addZero(date),
-      noDay ? this.addZero(day) : ''
-    ].join(split)
-  }
-
-  /**
-   * 时间转字符串
-   * @param split 分隔符 默认 :
-   * @returns 'hh:mm:ss'
-   */
-  static timeToString (split = ':') {
-    const { hour, min, sec } = this.formatTime()
-    return [
-      this.addZero(hour),
-      this.addZero(min),
-      this.addZero(sec)
-    ].join(split)
   }
 }
