@@ -5,7 +5,7 @@
  * @author InkSha<git@inksha.com>
  * @created 2023-10-07
  * @updated 2023-11-26
- * @version 1.0.2
+ * @version 1.0.5
  */
 
 /** 时间格式 */
@@ -167,9 +167,9 @@ export class Time {
    */
   static formatTime (hour = -1, min = -1, sec = -1) {
     const now = new Time()
-    if (~hour) hour = now.getHours()
-    if (~min) min = now.getMinutes()
-    if (~sec) sec = now.getSeconds()
+    if (!(~hour)) hour = now.getHours()
+    if (!(~min)) min = now.getMinutes()
+    if (!(~sec)) sec = now.getSeconds()
     return { hour, min, sec }
   }
 
@@ -183,10 +183,10 @@ export class Time {
    */
   static formatDate (year = -1, month = -1, date = -1, day = -1) {
     const now = new Time()
-    if (~year) year = now.getYear()
-    if (~month) month = now.getMonth()
-    if (~date) date = now.getDate()
-    if (~day) day = now.getDay()
+    if (!(~year)) year = now.getYear()
+    if (!(~month)) month = now.getMonth()
+    if (!(~date)) date = now.getDate()
+    if (!(~day)) day = now.getDay()
     return { year, month, date, day }
   }
 
