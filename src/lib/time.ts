@@ -32,13 +32,13 @@ export class Time {
   /**
    * @param date 处理的日期 默认为当前日期
    */
-  constructor(private date = new Date()) {}
+  constructor (private date = new Date()) {}
 
   /**
    * 获取当前日期的小时
    * @returns 当前日期的小时
    */
-  getHours() {
+  getHours () {
     return this.date.getHours()
   }
 
@@ -46,7 +46,7 @@ export class Time {
    * 获取当前日期的分钟
    * @returns 当前日期的分钟
    */
-  getMinutes() {
+  getMinutes () {
     return this.date.getMinutes()
   }
 
@@ -54,7 +54,7 @@ export class Time {
    * 获取当前日期的秒
    * @returns 当前日期的秒
    */
-  getSeconds() {
+  getSeconds () {
     return this.date.getSeconds()
   }
 
@@ -62,7 +62,7 @@ export class Time {
    * 获取当前日期的年
    * @returns 当前日期的年
    */
-  getYear() {
+  getYear () {
     return this.date.getFullYear()
   }
 
@@ -70,7 +70,7 @@ export class Time {
    * 获取当前日期的月
    * @returns 当前日期的月
    */
-  getMonth() {
+  getMonth () {
     return this.date.getMonth()
   }
 
@@ -78,15 +78,15 @@ export class Time {
    * 获取当前日期的星期几
    * @returns 当前日期为星期几
    */
-  getDay() {
-    return this.date.getDay()
+  getDay () {
+    return this.date.getDay() + 1
   }
 
   /**
    * 获取当前日期的日期
    * @returns 当前日期的日期
    */
-  getDate() {
+  getDate () {
     return this.date.getDate()
   }
 
@@ -94,7 +94,7 @@ export class Time {
    * 变更当前日期
    * @param date 变更的日期
    */
-  changeDate(date = new Date()) {
+  changeDate (date = new Date()) {
     this.date = date
   }
 
@@ -102,7 +102,7 @@ export class Time {
    * 获取当前日期对象
    * @returns 当前日期对象
    */
-  getNowTime() {
+  getNowTime () {
     return this.date
   }
 
@@ -112,7 +112,7 @@ export class Time {
    * @param now 新的时间 默认当前时间
    * @returns 两个时间的差
    */
-  computedDateDifference(old = new Date(), now = this.date) {
+  computedDateDifference (old = new Date(), now = this.date) {
     const difference = +now - +old
     const result: Partial<DifferenceTime> = {}
     result.sec = difference / 1000
@@ -128,7 +128,7 @@ export class Time {
    * 获取当前日期的格式化的时间
    * @returns 格式化的时间
    */
-  formatTime() {
+  formatTime () {
     return Time.formatTime(
       this.getHours(),
       this.getMinutes(),
@@ -140,7 +140,7 @@ export class Time {
    * 获取当前日期的格式化的日期
    * @returns 格式化的日期
    */
-  formatDate() {
+  formatDate () {
     return Time.formatDate(
       this.getYear(),
       this.getMonth(),
@@ -154,7 +154,7 @@ export class Time {
    * @param time 需要增加零的数字
    * @returns '09' | '12'
    */
-  static addZero(time: number) {
+  static addZero (time: number) {
     return `${time < 10 ? '0' : ''}${time}`
   }
 
@@ -165,7 +165,11 @@ export class Time {
    * @param sec 格式化的秒
    * @returns 格式化的时间对象
    */
-  static formatTime(hour = 0, min = 0, sec = 0) {
+  static formatTime (hour = -1, min = -1, sec = -1) {
+    const now = new Time()
+    if (~hour) hour = now.getHours()
+    if (~min) min = now.getMinutes()
+    if (~sec) sec = now.getSeconds()
     return { hour, min, sec }
   }
 
@@ -177,8 +181,12 @@ export class Time {
    * @param day 格式化的星期几
    * @returns 格式化的日期对象
    */
-  static formatDate(year = 0, month = 0, date = 0, day = 0) {
-    day += 1
+  static formatDate (year = -1, month = -1, date = -1, day = -1) {
+    const now = new Time()
+    if (~year) year = now.getYear()
+    if (~month) month = now.getMonth()
+    if (~date) date = now.getDate()
+    if (~day) day = now.getDay()
     return { year, month, date, day }
   }
 
@@ -188,11 +196,14 @@ export class Time {
    * @param noDay 是否取消星期几
    * @returns 'yyyy/mm/dd' | 'yyyy/mm/dd/day'
    */
-  static dateToString(split = '/', noDay = true) {
+  static dateToString (split = '/', noDay = true) {
     const { year, month, date, day } = this.formatDate()
-    return `${year}${split}${this.addZero(month)}${split}${this.addZero(
-      date,
-    )}${split}${noDay ? this.addZero(day) : ''}`
+    return [
+      year,
+      this.addZero(month),
+      this.addZero(date),
+      noDay ? this.addZero(day) : ''
+    ].join(split)
   }
 
   /**
@@ -200,10 +211,12 @@ export class Time {
    * @param split 分隔符 默认 :
    * @returns 'hh:mm:ss'
    */
-  static timeToString(split = ':') {
+  static timeToString (split = ':') {
     const { hour, min, sec } = this.formatTime()
-    return `${this.addZero(hour)}${split}${this.addZero(
-      min,
-    )}${split}${this.addZero(sec)}`
+    return [
+      this.addZero(hour),
+      this.addZero(min),
+      this.addZero(sec)
+    ].join(split)
   }
 }
