@@ -1,14 +1,4 @@
 /**
- * @file Math module.
- * @description Some Math operations.
- * @license MIT
- * @author InkSha<git@inksha.com>
- * @created 2023-10-07
- * @updated 2023-10-24
- * @version 1.0.0
- */
-
-/**
  * 生成随机数
  * @param start 开始值
  * @param end 结束值

@@ -1,14 +1,4 @@
 /**
- * @file Array module.
- * @description Some Array operations.
- * @license MIT
- * @author InkSha<git@inksha.com>
- * @created 2023-10-07
- * @updated 2023-10-24
- * @version 1.0.0
- */
-
-/**
  * 在原数组基础上进行旋转
  * @param array 旋转的二维数组
  * @param left 是否向左旋转

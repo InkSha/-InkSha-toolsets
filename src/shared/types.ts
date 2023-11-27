@@ -1,13 +1,3 @@
-/**
- * @file Judge types methods sets.
- * @description All judge types methods sets.
- * @license MIT
- * @author InkSha<git@inksha.com>
- * @created 2023-10-25
- * @updated 2023-10-28
- * @version 1.0.1
- */
-
 /** 原型类型 */
 export type PrototypeType = 'map' | 'date' | 'set' | 'regexp' | 'object'
 
