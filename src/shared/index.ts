@@ -1,5 +1,6 @@
 import { IndexObject, isArray, isPrototype } from './types'
 export * from './types'
+export * from './log'
 
 /**
  * 深拷贝对象
