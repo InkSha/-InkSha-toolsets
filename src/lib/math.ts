@@ -76,3 +76,25 @@ export const computedDivision = (num1: number, num2: number): number =>
  */
 export const computedPower = (base: number, power: number): number =>
   base ** power
+
+/**
+ * 切割数字
+ *
+ * ```js
+ * split(2,2) // 1
+ * split(3,2) // 1
+ * ```
+ * @param num 基数
+ * @param base 切割份数
+ * @param floor 向下取整
+ * @returns 切割后的数
+ */
+export const splitNumber = (num = 2, base = 2, floor = true) => {
+  const remain = num % base
+  const quotient = computedDivision(num, base)
+  return remain
+    ? (floor
+      ? Math.floor(quotient)
+      : Math.ceil(quotient))
+    : quotient
+}
