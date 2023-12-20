@@ -4,7 +4,7 @@
  * @param left 是否向左旋转
  * @returns 旋转后的数组
  */
-export function RotateArray<Element = number>(
+export function rotateArray<Element = number>(
   array: Element[][],
   left = false,
 ): Element[][] {
@@ -14,4 +14,22 @@ export function RotateArray<Element = number>(
     }
   }
   return left ? array.reverse() : array.map((row) => row.reverse())
+}
+
+/**
+ * 切割数组
+ * @param array 源数组
+ * @param split 切割数
+ * @returns 切割后的数组
+ */
+export function splitArray<T>(array: T[], split: number) {
+  const result: T[][] = []
+  for (let i = 0; i < array.length; i += split) {
+    const tmp: T[] = []
+    for (let j = i; j < i + split; j++) {
+      tmp.push(array[j])
+    }
+    result.push(tmp)
+  }
+  return result
 }
