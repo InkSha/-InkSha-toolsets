@@ -1,5 +1,5 @@
 
-import * as _array from '../../src/lib/array'
+import { rotateArray } from '../../src/lib/array'
 
 describe('Array Module', () => {
 
@@ -10,7 +10,7 @@ describe('Array Module', () => {
   ]
 
   test('RotateArray Right', () => {
-    expect(_array.RotateArray(array)).toStrictEqual([
+    expect(rotateArray(array)).toStrictEqual([
       [7, 4, 1],
       [8, 5, 2],
       [9, 6, 3],
@@ -18,7 +18,7 @@ describe('Array Module', () => {
   })
 
   test('RotateArray Left', () => {
-    expect(_array.RotateArray(array, true)).toStrictEqual([
+    expect(rotateArray(array, true)).toStrictEqual([
       [1, 2, 3],
       [4, 5, 6],
       [7, 8, 9]

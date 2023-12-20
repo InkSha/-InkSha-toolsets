@@ -31,7 +31,8 @@
   },
   // 指定编译目录
   "include": [
-    "src"
+    "src",
+    "src/shared/.ts"
   ],
   // 指定排除不编译的
   "exclude": [

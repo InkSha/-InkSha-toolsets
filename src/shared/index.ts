@@ -9,7 +9,7 @@ export * from './log'
  * @param data 可索引对象
  * @returns 深拷贝后对象
  */
-export const deepCopy = (data: IndexObject | unknown[]): typeof data => {
+export function deepCopy(data: IndexObject | unknown[]): typeof data {
   const result: typeof data = isArray(data) ? [] : {}
 
   const utils = (element: unknown) =>

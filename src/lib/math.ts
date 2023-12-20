@@ -4,7 +4,7 @@
  * @param end 结束值
  * @returns 在范围内的随机数
  */
-export function generatorRandom (start = 0, end = 100) {
+export function generatorRandom(start = 0, end = 100) {
   return Math.floor(Math.random() * end + start + 1)
 }
 
@@ -16,7 +16,7 @@ export function generatorRandom (start = 0, end = 100) {
  * @param repeat 是否允许重复
  * @returns 指定范围内的随机数列表
  */
-export function generatorRandomList (
+export function generatorRandomList(
   start = 0,
   end = 100,
   quantity = 1,
@@ -93,8 +93,8 @@ export const splitNumber = (num = 2, base = 2, floor = true) => {
   const remain = num % base
   const quotient = computedDivision(num, base)
   return remain
-    ? (floor
+    ? floor
       ? Math.floor(quotient)
-      : Math.ceil(quotient))
+      : Math.ceil(quotient)
     : quotient
 }

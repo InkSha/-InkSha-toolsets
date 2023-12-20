@@ -18,7 +18,8 @@ export const toLen = (char = '', len = 80) => {
  * @param len 填充后的长度
  * @returns 增加后的字符串
  */
-export const addHead = (str = '', char = '-', len = 80) => (toLen(char, len - str.length) + str)
+export const addHead = (str = '', char = '-', len = 80) =>
+  toLen(char, len - str.length) + str
 
 /**
  * 填充指定长度字符到字符串尾部
@@ -27,7 +28,8 @@ export const addHead = (str = '', char = '-', len = 80) => (toLen(char, len - st
  * @param len 填充后的长度
  * @returns 增加后的字符串
  */
-export const addTail = (str = '', char = '-', len = 80) => (str + toLen(char, len - str.length))
+export const addTail = (str = '', char = '-', len = 80) =>
+  str + toLen(char, len - str.length)
 
 /**
  * 填充指定长度字符到字符串两侧
@@ -37,7 +39,7 @@ export const addTail = (str = '', char = '-', len = 80) => (str + toLen(char, le
  * @returns 增加后的字符串
  */
 export const addMiddle = (str = '', char = '-', len = 80) => {
-  let shortLen = splitNumber(len, 2) + splitNumber(str.length, 2)
+  const shortLen = splitNumber(len, 2) + splitNumber(str.length, 2)
   return addTail(addHead(str, char, shortLen), char, len)
 }
 /**

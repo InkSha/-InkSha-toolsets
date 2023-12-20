@@ -21,7 +21,7 @@ export const Font = {
     blue: '\x1B[34m',
     magenta: '\x1B[35m',
     cyan: '\x1B[36m',
-    white: '\x1B[37m'
+    white: '\x1B[37m',
   },
   bg: {
     black: '\x1B[40m',
@@ -32,7 +32,7 @@ export const Font = {
     magenta: '\x1B[45m',
     cyan: '\x1B[46m',
     white: '\x1B[47m',
-  }
+  },
 }
 
 export const logLevel = {
@@ -41,9 +41,8 @@ export const logLevel = {
   damage: 'red',
   success: 'green',
   normal: 'cyan',
-  error: 'magenta'
+  error: 'magenta',
 }
-
 
 export class Log {
   private text: string[] = []
@@ -52,103 +51,104 @@ export class Log {
   private lineArray: string[] = []
   private endSymbol = ''
 
-  constructor () {}
+  constructor() {}
 
-  private cancel (char = '') {
+  private cancel(char = '') {
     if (this.text.slice(-1)[0] === char) {
       this.text.pop()
     }
     return this
   }
 
-  pushText (string = '') {
+  pushText(string = '') {
     if (this.line) {
       this.lineArray.push(string)
-    }
-    else this.text.push(string)
+    } else this.text.push(string)
     return this
   }
 
-  indent (add = true) {
+  indent(add = true) {
     return add ? this.pushText(indent) : this.cancel(indent)
   }
 
-  wrap (add = true) {
+  wrap(add = true) {
     return add ? this.pushText(wrap) : this.cancel(wrap)
   }
 
-  print (noWrap = true) {
+  print(noWrap = true) {
     console.log(this.text.join(noWrap ? ' ' : wrap))
     return this.reset()
   }
 
-  reset () {
+  reset() {
     this.text.length = 0
     return this
   }
 
-  head (message: string, split = '-') {
+  head(message: string, split = '-') {
     return this.pushText(addMiddle(message, split, this.width))
   }
 
-  addTime () {
+  addTime() {
     return this.pushText(new Time().timeToString())
   }
 
-  addDate () {
+  addDate() {
     return this.pushText(new Time().dateToString())
   }
 
-  addTimer () {
+  addTimer() {
     return this.addDate().addTime()
   }
 
-  addHeadTime (onlyDate = false) {
+  addHeadTime(onlyDate = false) {
     if (onlyDate) this.addDate()
     else this.addTimer()
-    return this.head(['[', ...this.text.splice(onlyDate ? -1 : -2), ']'].join(' '))
+    return this.head(
+      ['[', ...this.text.splice(onlyDate ? -1 : -2), ']'].join(' '),
+    )
   }
 
-  split (char = '-', len = this.width) {
+  split(char = '-', len = this.width) {
     if (this.line) this.endLine()
     return this.pushText(toLen(char, len))
   }
 
-  inline () {
+  inline() {
     if (this.line) this.endLine()
     this.line = true
     return this
   }
 
-  endLine () {
+  endLine() {
     this.line = false
     this.pushText(this.lineArray.join(''))
     this.lineArray.length = 0
     return this
   }
 
-  color (color: keyof typeof Font.color) {
+  color(color: keyof typeof Font.color) {
     return this.pushText(Font.color[color])
   }
 
-  bg (color: keyof typeof Font.bg) {
+  bg(color: keyof typeof Font.bg) {
     return this.pushText(Font.bg[color])
   }
 
-  style (style: keyof typeof Font.style) {
+  style(style: keyof typeof Font.style) {
     return this.pushText(Font.style[style])
   }
 
-  endFont () {
+  endFont() {
     return this.pushText(styleEnd)
   }
 
-  inner (char = '[]', space = true) {
+  inner(char = '[]', space = true) {
     this.endSymbol = `${space ? ' ' : ''}` + char.slice(-1)
     return this.pushText(char.charAt(0) + `${space ? ' ' : ''}`)
   }
 
-  endInner () {
+  endInner() {
     this.pushText(this.endSymbol)
     this.endSymbol = ''
     return this

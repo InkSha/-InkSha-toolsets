@@ -1,6 +1,6 @@
 {
   "name": "@inksha/tools",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "My collection of commonly used development tools.",
   "main": "dist/index.min.js",
   "module": "dist/index.min.mjs",
