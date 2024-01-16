@@ -42,6 +42,7 @@ export const addMiddle = (str = '', char = '-', len = 80) => {
   const shortLen = splitNumber(len, 2) + splitNumber(str.length, 2)
   return addTail(addHead(str, char, shortLen), char, len)
 }
+
 /**
  * 切割字符串
  * @param str 原始字符串
@@ -60,4 +61,15 @@ export const splitString = (str = '', len = 2) => {
   }
   if (tmp) result.push(tmp)
   return result
+}
+
+/**
+ * 插入子串
+ * @param str 原始字符串
+ * @param substring 插入的子串
+ * @param position 插入的位置
+ * @returns 插入子串后的字符串
+ */
+export const insertSubstring = (str: string, substring = '', position = 0) => {
+  return str.substring(0, position) + substring + str.substring(position)
 }
