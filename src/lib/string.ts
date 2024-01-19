@@ -1,4 +1,4 @@
-import { splitNumber } from './math'
+import { generatorRandom, splitNumber } from './math'
 
 /**
  * 增加字符到指定长度
@@ -70,6 +70,23 @@ export const splitString = (str = '', len = 2) => {
  * @param position 插入的位置
  * @returns 插入子串后的字符串
  */
-export const insertSubstring = (str: string, substring = '', position = 0) => {
+export const insertSubstring = (str = '', substring = '', position = 0) => {
+  while (position < 0) {
+    position = position < 0 ? str.length + position : position
+  }
   return str.substring(0, position) + substring + str.substring(position)
+}
+
+/**
+ * 生成字符串
+ * @param len 字符串长度
+ * @param random 是否随机长度
+ * @param min 最短长度
+ * @returns 指定长度字符串
+ */
+export const generatorString = (len = 1, random = false, min = len) => {
+  if (random) len = generatorRandom(min, len)
+  const result: string[] = []
+  for (let i = 0; i < len; i++) result.push(generatorRandom(0, 35).toString(36))
+  return result.map(str => Math.random() < .5 ? str.toUpperCase() : str).join('')
 }
